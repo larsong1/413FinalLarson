@@ -1,7 +1,14 @@
+using _413FinalLarson.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<FinalContext>(options => options.UseSqlite(builder.Configuration["ConnectionStrings:FinalConnection"]));
+
+builder.Services.AddScoped<IFinalRepository, EFFinalRepository>();
 
 var app = builder.Build();
 

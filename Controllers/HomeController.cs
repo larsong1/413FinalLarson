@@ -6,11 +6,11 @@ namespace _413FinalLarson.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private IFinalRepository _repo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IFinalRepository repo)
         {
-            _logger = logger;
+            _repo = repo;
         }
 
         public IActionResult Index()
@@ -18,15 +18,46 @@ namespace _413FinalLarson.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Entertainers()
         {
-            return View();
+            var entertainers = _repo.Entertainers.ToList();
+
+            return View(entertainers);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult ViewEntertainer(int id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var recordToView = _repo.Entertainers.Single(x => x.EntertainerId == id);
+
+            return View(recordToView);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Entertainer ent)
+        {
+            _repo.UpdateEntertainer(ent);
+            return RedirectToAction("Entertainers");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _repo.Entertainers.Single(x => x.EntertainerId == id);
+
+            _repo.DeleteEntertainer(recordToDelete);
+            return RedirectToAction("Entertainers");
+        }
+
+        [HttpGet]
+        public IActionResult Add ()
+        {
+            return View(new Entertainer());
+        }
+
+        [HttpPost]
+        public IActionResult Add(Entertainer ent)
+        {
+            _repo.AddEntertainer(ent);
+            return RedirectToAction("Entertainers");
         }
     }
 }

@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Entertainer
+
+<form asp-controller="Home" asp-action="Add" method="POST" class="text-white text-center">
+    <input type="hidden" asp-for="EntertainerId"><br>
+
+    <label asp-for="EntStageName">Stage Name:</label><br>
+    <input asp-for="EntStageName"><br>
+
+    <label asp-for="EntSsn">SSN:</label><br>
+    <input asp-for="EntSsn"><br>
+
+    <label asp-for="EntStreetAddress">Address:</label><br>
+    <input asp-for="EntStreetAddress"><br>
+
+    <label asp-for="EntCity">City:</label><br>
+    <input asp-for="EntCity"><br>
+
+    <label asp-for="EntState">State:</label><br>
+    <input asp-for="EntState"><br>
+
+    <label asp-for="EntZipCode">Zip:</label><br>
+    <input asp-for="EntZipCode"><br>
+
+    <label asp-for="EntPhoneNumber">Phone:</label><br>
+    <input asp-for="EntPhoneNumber"><br>
+
+    <label asp-for="EntWebPage">Web Page URL:</label><br>
+    <input asp-for="EntWebPage"><br>
+
+    <label asp-for="EntEmailAddress">Email:</label><br>
+    <input asp-for="EntEmailAddress"><br>
+
+    <label asp-for="DateEntered">Date Entered:</label><br>
+    <input asp-for="DateEntered"><br>
+    <br>
+    <button class="btn btn-outline-info">Create Entertainer</button>
+
+    <div asp-validation-summary="All"></div> @*Shows error messages if model constraints are not met*@
+</form>

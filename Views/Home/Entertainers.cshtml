@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Entertainer>
+
+
+<div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
+    <div class="list-group">
+        @foreach (Entertainer e in Model)
+        {
+            <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                <div class="d-flex gap-2 w-100 justify-content-between">
+                    <div>
+                        <h6 class="mb-0">@e.EntStageName</h6>
+                    </div>
+                </div>
+                <form id="@e.EntertainerId" method="post" asp-controller="Home" asp-action="ViewEntertainer" asp-route-id="@e.EntertainerId">
+                    <button type="submit" class="btn-outline-success btn-sm float-end">Details</button>
+                </form>
+            </a>
+        }
+        <br />
+        <a class="btn btn-outline-info" asp-controller="Home" asp-action="Add">New Entertainer</a>
+    </div>
+</div>
